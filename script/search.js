@@ -1,4 +1,4 @@
-const debug = async () => {
+const search = async () => {
     let input = document.getElementById('search');
 
     try {
@@ -10,20 +10,14 @@ const debug = async () => {
             body: `search=${encodeURIComponent(input.value)}`,
         });
 
-        // Ambil teks dulu untuk lihat isinya
-        const text = await res.text();
-        console.log('Raw Response:', text);
-
-        // Coba parse ke JSON
-        const data = JSON.parse(text);
-        console.log('Parsed JSON:', data);
+        const data = res.json();
         updateTable(data);
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
-document.getElementById('search').addEventListener('input', debug);
+document.getElementById('search').addEventListener('change', search);
 
 const updateTable = (data) => {
     let tableBody = document.getElementById('table-body');

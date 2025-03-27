@@ -69,7 +69,7 @@ elseif(isset($_POST['clear'])){
   $search = mysqli_real_escape_string($conn, $_POST['search']);
 
   // Query untuk pencarian berdasarkan nama pasien
-  $query = "SELECT * FROM daftar WHERE nama LIKE '%$search%' ORDER BY id DESC";
+  $query = "SELECT * FROM daftar WHERE nama LIKE '%$search%' ORDER BY id ASC";
   $result = mysqli_query($conn, $query);
 
   if ($result) {
