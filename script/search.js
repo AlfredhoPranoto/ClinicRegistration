@@ -1,3 +1,5 @@
+import debounce from './debounce';
+
 const search = async () => {
     let input = document.getElementById('search');
 
@@ -10,14 +12,16 @@ const search = async () => {
             body: `search=${encodeURIComponent(input.value)}`,
         });
 
-        const data = res.json();
+        const data = await res.json();
         updateTable(data);
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
-document.getElementById('search').addEventListener('change', search);
+const debouncedSearch = debounce(search, 300);
+
+document.getElementById('search').addEventListener('input', debouncedSearch);
 
 const updateTable = (data) => {
     let tableBody = document.getElementById('table-body');
